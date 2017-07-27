@@ -5,13 +5,13 @@
 helpful libraries for JavaScript programming
 
 ## Features
-- [.forEach](#forEach)
+- [.forEach](#foreach)
 - [.select](#select)
-- [.selectMany](#selectMany)
+- [.selectMany](#selectmany)
 - [.where](#where)
-- [.firstOrDefault](#firstOrDefault)
-- [.indexOf](#indexOf)
-- [.groupBy](#groupBy)
+- [.firstOrDefault](#firstordefault)
+- [.indexOf](#indexof)
+- [.groupBy](#groupby)
 - [.any](#any)
 - [.exists](#exists)
 - [.sum](#sum)
@@ -21,9 +21,9 @@ helpful libraries for JavaScript programming
 - [.remove](#remove)
 - [.take](#take)
 - [.skip](#skip)
-- [.orderBy](#orderBy)
-- [.orderByDescending](#orderByDescending)
-- [.toArray](#toArray)
+- [.orderBy](#orderby)
+- [.orderByDescending](#orderbydescending)
+- [.toArray](#toarray)
 
 ### Using npm
 ```bash
