@@ -2,25 +2,18 @@ var linq = require("../src/linq.js");
 
 var sampleData = [
     {
-        id: 1,
-        name: "John",
-        age: 30,
-        city: "istanbul",
-        cars: ["Ford", "BMW", "Fiat"]
-    },
-    {
-        id: 2,
-        name: "Marry",
-        age: 25,
-        city: "istanbul",
-        cars: ["Ford"]
-    },
-    {
         id: 3,
         name: "julia",
         age: 22,
         city: "izmir",
         cars: ["Fiat"]
+    },
+    {
+        id: 1,
+        name: "John",
+        age: 30,
+        city: "istanbul",
+        cars: ["Ford", "BMW", "Fiat"]
     },
     {
         id: 4,
@@ -35,7 +28,14 @@ var sampleData = [
         age: 22,
         city: "istanbul",
         cars: []
-    }
+    },
+    {
+        id: 2,
+        name: "Marry",
+        age: 25,
+        city: "istanbul",
+        cars: ["Ford"]
+    },
 ];
 
 
@@ -65,6 +65,9 @@ list = linqContext
     .orderByDescending(function (x) { return x.age })
     .select(function (x) { return x.age; })
     .toArray();
-
 log("</br> orderByDescending </br></br> result</br>" + JSON.stringify(list));
+
+var sira=new linq([5,2,1,6,7]).orderByDescending(function(x){return x;}).toArray();
+
+log("</br> orderByDescending </br></br> result</br>" + JSON.stringify(sira));
 

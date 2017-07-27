@@ -1,4 +1,5 @@
 var collection = require("./collection.js");
+
 collection.prototype.forEach = function (expression) {
     for (var index = 0; index < this.length; index++) {
         if (expression(this.getEnumerator()[index], index)) {
@@ -21,7 +22,15 @@ collection.prototype.select = function (expression) {
     });
     return new collection(list);
 }
-
+collection.prototype.selectMany=function(expression){
+    var list=[];
+    this.forEach(function(x){
+        new collection(x).forEach(function(item){
+            list.push(item);
+        });
+    });
+    return new collection(list);
+}
 collection.prototype.remove = function (expression) {
     var list = [];
     this.forEach(function (item) {
@@ -82,7 +91,7 @@ collection.prototype.where = function (expression) {
     return new collection(list);
 }
 
-collection.prototype.firstOfDefault = function (expression) {
+collection.prototype.firstOrDefault = function (expression) {
     var findItem = undefined;
     this.forEach(function (item) {
         if (findItem === undefined && expression(item)) {
@@ -133,13 +142,13 @@ collection.prototype.orderBy = function (expression) {
     var _collection = this;
     _collection.forEach(function (x, xIndex) {
         _collection.forEach(function (y, yIndex) {
-            if (xIndex != yIndex) {
+            //if (xIndex != yIndex) {
                 if (expression(x) > expression(y)) {
                     list[yIndex] = x;
                     list[xIndex] = y;
                     xIndex = yIndex;
                 }
-            }
+            //}
         });
         _collection = new collection(list);
     });
@@ -150,13 +159,13 @@ collection.prototype.orderByDescending = function (expression) {
     var _collection = this;
     _collection.forEach(function (x, xIndex) {
         _collection.forEach(function (y, yIndex) {
-            if (xIndex != yIndex) {
+            //if (xIndex != yIndex) {
                 if (expression(x) < expression(y)) {
                     list[yIndex] = x;
                     list[xIndex] = y;
                     xIndex = yIndex;
                 }
-            }
+            //}
         });
         _collection = new collection(list);
     });
