@@ -1,6 +1,6 @@
 {
   "name": "ex-js-linq",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "",
   "main": "./src/linq.js",
   "keywords": [

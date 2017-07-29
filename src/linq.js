@@ -22,10 +22,10 @@ collection.prototype.select = function (expression) {
     });
     return new collection(list);
 }
-collection.prototype.selectMany=function(expression){
-    var list=[];
-    this.forEach(function(x){
-        new collection(x).forEach(function(item){
+collection.prototype.selectMany = function (expression) {
+    var list = [];
+    this.forEach(function (x) {
+        new collection(x).forEach(function (item) {
             list.push(item);
         });
     });
@@ -139,35 +139,33 @@ collection.prototype.groupBy = function (expression) {
 
 collection.prototype.orderBy = function (expression) {
     var list = this.getEnumerator();
-    var _collection = this;
-    _collection.forEach(function (x, xIndex) {
-        _collection.forEach(function (y, yIndex) {
-            //if (xIndex != yIndex) {
-                if (expression(x) > expression(y)) {
-                    list[yIndex] = x;
-                    list[xIndex] = y;
-                    xIndex = yIndex;
-                }
-            //}
-        });
-        _collection = new collection(list);
+    this.forEach(function (x, xIndex) {
+        var isInLine = true;
+        for (var yIndex = list.length - 1; yIndex > xIndex; yIndex--) {
+            if (expression(list[yIndex - 1]) > expression(list[yIndex])) {
+                tmp = list[yIndex - 1];
+                list[yIndex - 1] = list[yIndex];
+                list[yIndex] = tmp;
+                isInLine = false;
+            }
+        }
+        return isInLine;
     });
     return new collection(list);
 }
 collection.prototype.orderByDescending = function (expression) {
     var list = this.getEnumerator();
-    var _collection = this;
-    _collection.forEach(function (x, xIndex) {
-        _collection.forEach(function (y, yIndex) {
-            //if (xIndex != yIndex) {
-                if (expression(x) < expression(y)) {
-                    list[yIndex] = x;
-                    list[xIndex] = y;
-                    xIndex = yIndex;
-                }
-            //}
-        });
-        _collection = new collection(list);
+    this.forEach(function (x, xIndex) {
+        var isInLine = true;
+        for (var yIndex = list.length - 1; yIndex > xIndex; yIndex--) {
+            if (expression(list[yIndex - 1]) < expression(list[yIndex])) {
+                tmp = list[yIndex - 1];
+                list[yIndex - 1] = list[yIndex];
+                list[yIndex] = tmp;
+                isInLine = false;
+            }
+        }
+        return isInLine;
     });
     return new collection(list);
 }
