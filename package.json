@@ -1,12 +1,17 @@
 {
   "name": "ex-js-linq",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "",
   "main": "./src/linq.js",
   "keywords": [
     "linq",
     "javascript linq",
     "linq frameworks"
+  ],
+  "files": [
+    "LICENSE",
+    "README.md",
+    "src/"
   ],
   "author": "Muhammet Furkan DOĞAN dogan.furkan@msn.com",
   "license": "GNU"

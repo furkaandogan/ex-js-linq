@@ -1,2 +1,6 @@
-!./test/
-!./.vscode/
+# .npmignore
+
+/src
+.idea
+README.md
+LICENSE
