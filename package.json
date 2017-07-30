@@ -1,6 +1,6 @@
 {
   "name": "ex-js-linq",
-  "version": "2.0.1",
+  "version": "2.0.4",
   "description": "Linq framework for node js programming language",
   "main": "./src/linq.js",
   "licenses": [
@@ -13,6 +13,10 @@
     "url": "https://github.com/furkaandogan/ex-js-linq/issues",
     "email": "info@muhammetfurkandogan.com"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/furkaandogan/ex-js-linq"
+  },
   "keywords": [
     "linq",
     "javascript linq",
@@ -24,5 +28,5 @@
     "src/"
   ],
   "author": "Muhammet Furkan DOĞAN info@muhammetfurkandogan.com (http://www.muhammetfurkandogan.com/)",
-  "license": "GNU"
+  "license": "MIT"
 }

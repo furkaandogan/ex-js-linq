@@ -1,6 +1,6 @@
 # .npmignore
 
-/src
-.idea
-README.md
-LICENSE
+#/src
+#.idea
+#README.md
+#LICENSE

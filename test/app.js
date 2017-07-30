@@ -68,10 +68,17 @@ list = linqContext
 log("</br> orderByDescending </br></br> result</br>" + JSON.stringify(list));
 
 var sira=new linq([5,2,1,6,7]).orderByDescending(function(x){return x;}).toArray();
-log("</br> orderByDescending </br></br> result</br>" + JSON.stringify(sira));
-var sira=new linq([1,2,3,4,5,6,7]).orderBy(function(x){return x;}).toArray();
-log("</br> orderByDescending </br></br> result</br>" + JSON.stringify(sira));
-var sira=new linq([1,2,3,4,5,6,7]).orderByDescending(function(x){return x;}).toArray();
-log("</br> orderByDescending </br></br> result</br>" + JSON.stringify(sira));
+
+
+var result=new linq(sampleData)
+        .groupBy(function(x){return x.city;})
+        .toArray();
+console.log(result);
+
+var result=new linq(sampleData)
+        .groupBy(function(x){return x.city;})
+        .selectMany(function(x){return x.items})
+        .toArray();
+console.log(result);
 
 

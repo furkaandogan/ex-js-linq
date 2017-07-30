@@ -25,7 +25,8 @@ collection.prototype.select = function (expression) {
 collection.prototype.selectMany = function (expression) {
     var list = [];
     this.forEach(function (x) {
-        new collection(x).forEach(function (item) {
+        var selectList = expression(x);
+        new collection(selectList).forEach(function (item) {
             list.push(item);
         });
     });

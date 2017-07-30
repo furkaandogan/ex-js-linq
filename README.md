@@ -1,5 +1,5 @@
 
-[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=1.0.2&x2=0)](https://www.npmjs.com/package/ex-js-linq)
+[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=2.0.4&x2=0)](https://www.npmjs.com/package/ex-js-linq)
 
 # ex-js-linq
 helpful libraries for JavaScript programming
@@ -33,7 +33,7 @@ npm install ex-js-linq
 ## Overview
 
 ```js
-var linq = require("npm install ex-js-linq");
+var linq = require("ex-js-linq");
 var sampleData = [ 
     { id: 3, name: "julia", age: 22, city: "izmir", cars: ["Fiat"] }, 
     { id: 2, name: "Marry", age: 25, city: "istanbul", cars: ["Ford"] }, 
@@ -88,14 +88,14 @@ var sampleData = [
 ### .groupBy
 ```js
     var result=new linq(sampleData)
-        .orderBy(function(x){return x.city;})
+        .groupBy(function(x){return x.city;})
         .selectMany(function(x){
             return x.items
         }).toArray();
     // result =>[item1,item2,item3,...]
     // or
     var result=new linq(sampleData)
-        .orderBy(function(x){return x.city;})
+        .groupBy(function(x){return x.city;})
         .toArray();
     // result => [{key:"istanbul",items:[item1,item2,...]},{key:"izmir",items:[item1,item2,...]}]
 ```
