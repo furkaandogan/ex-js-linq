@@ -120,23 +120,35 @@ var sampleData = [
 ```js
     var result=new linq(sampleData)
         .sum(function(x){return x.age;}); 
+    // or
+    var result=new linq([1,2,3]).sum();
+    // result => 6
 ```
 ### .avg
 ```js
     var result=new linq(sampleData)
         .avg(function(x){return x.age;}); 
+    // or
+    var result=new linq([1,2,3]).sum();
+    // result => 2
 ```
 ### .min
 ```js
     var result=new linq(sampleData)
         .min(function(x){return x.age;}); 
     // result => 22
+    // or
+    var result=new linq([1,2,3]).sum();
+    // result => 1
 ```
 ### .max
 ```js
     var result=new linq(sampleData)
         .min(function(x){return x.age;}); 
     // result => 30
+    // or
+    var result=new linq([1,2,3]).sum();
+    // result => 3
 ```
 ### .remove
 ```js
@@ -169,4 +181,31 @@ var sampleData = [
 ### .toArray
 ```js
     var result=new linq(sampleData).toArray();
+```
+### .distinct
+```js
+    var result=new linq(sampleData).distinct().toArray();
+    // or
+    var result=new linq(sampleData).distinct(function(x){ return x.id;}).toArray();
+```
+### .add
+```js
+    var item={};
+    new linq(sampleData).add(item);
+```
+### .addRange
+```js
+    var items=[];
+    new linq(sampleData).add(items);
+```
+### .join
+```js
+    var items=[];
+    var result=new linq(sampleData).join(items).toArray();
+```
+### .count
+```js
+    var count=new linq(sampleData).count();
+    // or
+    var count=new linq(sampleData).count(function(x){ return x.cars.lenght>2;});
 ```

@@ -43,7 +43,7 @@ collection.prototype.remove = function (expression) {
     return new collection(list);
 }
 collection.prototype.sum = function (expression) {
-    var total = undefined;
+    var total = 0;
     expression = expression || defaultExpression;
     this.forEach(function (item) {
         total += expression(item);
@@ -51,7 +51,8 @@ collection.prototype.sum = function (expression) {
     return total;
 }
 collection.prototype.avg = function (expression) {
-    var result = undefined;
+    var result = 0;
+    expression = expression || defaultExpression;
     this.forEach(function (item) {
         result += expression(item);
     });
@@ -59,7 +60,8 @@ collection.prototype.avg = function (expression) {
     return result / this.length;
 }
 collection.prototype.min = function (expression) {
-    var minValue = undefined;
+    var minValue = 0;
+    expression = expression || defaultExpression;
     this.forEach(function (item) {
         var val = expression(item);
         if (minValue === undefined) {
@@ -71,7 +73,8 @@ collection.prototype.min = function (expression) {
     return minValue;
 }
 collection.prototype.max = function (expression) {
-    var maxValue = undefined;
+    var maxValue = 0;
+    expression = expression || defaultExpression;
     this.forEach(function (item) {
         var val = expression(item);
         if (maxValue === undefined) {
@@ -96,6 +99,7 @@ collection.prototype.where = function (expression) {
 
 collection.prototype.firstOrDefault = function (expression) {
     var findItem = undefined;
+    expression = expression || defaultExpression;
     this.forEach(function (item) {
         if (findItem === undefined && expression(item)) {
             findItem = item;
@@ -157,6 +161,7 @@ collection.prototype.orderBy = function (expression) {
     return new collection(list);
 }
 collection.prototype.orderByDescending = function (expression) {
+    _this = this;
     var list = this.getEnumerator();
     this.forEach(function (x, xIndex) {
         var isInLine = true;
@@ -201,15 +206,15 @@ collection.prototype.toArray = function () {
 }
 
 collection.prototype.distinct = function (expression) {
-    var list = [];
-    expression = expression || function (x) { return x; }
+    _this = this;
+    expression = expression || defaultExpression;
     this.forEach(function (x) {
         var val = expression(x);
         if (!new collection(list).any(function (y) { return y == val; })) {
-            list.push(val);
+            _this.getEnumerator().push(val);
         }
     });
-    return new collection(list);
+    return _this;
 }
 collection.prototype.add = function (item) {
     this.getEnumerator().push(item);
@@ -230,7 +235,7 @@ collection.prototype.join = function (array) {
 }
 
 collection.prototype.count = function (expression) {
-    expression = expression || function (x) { return x; }
+    expression = expression || defaultExpression;
     return this.where(expression).length;
 }
 
