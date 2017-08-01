@@ -1,4 +1,5 @@
 var collection = require("./collection.js");
+var defaultExpression = function (x) { return x; }
 
 collection.prototype.forEach = function (expression) {
     for (var index = 0; index < this.length; index++) {
@@ -43,6 +44,7 @@ collection.prototype.remove = function (expression) {
 }
 collection.prototype.sum = function (expression) {
     var total = undefined;
+    expression = expression || defaultExpression;
     this.forEach(function (item) {
         total += expression(item);
     });
@@ -196,6 +198,40 @@ collection.prototype.indexOf = function (expression) {
 
 collection.prototype.toArray = function () {
     return this.getEnumerator();
+}
+
+collection.prototype.distinct = function (expression) {
+    var list = [];
+    expression = expression || function (x) { return x; }
+    this.forEach(function (x) {
+        var val = expression(x);
+        if (!new collection(list).any(function (y) { return y == val; })) {
+            list.push(val);
+        }
+    });
+    return new collection(list);
+}
+collection.prototype.add = function (item) {
+    this.getEnumerator().push(item);
+}
+collection.prototype.addRange = function (items) {
+    _this = this;
+    new collection(items).forEach(function (x) {
+        _this.getEnumerator().push(x);
+    });
+}
+
+collection.prototype.join = function (array) {
+    _this = this;
+    new collection(array).forEach(function (x) {
+        _this.getEnumerator().push(x);
+    });
+    return this;
+}
+
+collection.prototype.count = function (expression) {
+    expression = expression || function (x) { return x; }
+    return this.where(expression).length;
 }
 
 module.exports = collection;

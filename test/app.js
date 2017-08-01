@@ -67,18 +67,40 @@ list = linqContext
     .toArray();
 log("</br> orderByDescending </br></br> result</br>" + JSON.stringify(list));
 
-var sira=new linq([5,2,1,6,7]).orderByDescending(function(x){return x;}).toArray();
+var sira = new linq([5, 2, 1, 6, 7]).orderByDescending(function (x) { return x; }).toArray();
 
 
-var result=new linq(sampleData)
-        .groupBy(function(x){return x.city;})
-        .toArray();
+var result = new linq(sampleData)
+    .groupBy(function (x) { return x.city; })
+    .toArray();
 console.log(result);
 
-var result=new linq(sampleData)
-        .groupBy(function(x){return x.city;})
-        .selectMany(function(x){return x.items})
-        .toArray();
+var result = new linq(sampleData)
+    .groupBy(function (x) { return x.city; })
+    .selectMany(function (x) { return x.items })
+    .toArray();
 console.log(result);
+
+var result = new linq(sampleData)
+    .join([
+        {
+            id: 6,
+            name: "Polina",
+            age: 21,
+            city: "istanbul",
+            cars: ["BMW"]
+        },
+        {
+            id: 7,
+            name: "Mert",
+            age: 41,
+            city: "istanbul",
+            cars: ["BMW"]
+        }])
+    .toArray();
+
+console.log(result);
+console.log(new linq(sampleData).count());
+console.log(new linq(sampleData).count(function (x) { return x.id > 3; }));
 
 

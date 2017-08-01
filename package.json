@@ -1,6 +1,6 @@
 {
   "name": "ex-js-linq",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "Linq framework for node js programming language",
   "main": "./src/linq.js",
   "licenses": [
