@@ -1,5 +1,5 @@
 
-[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=2.0.5&x2=0)](https://www.npmjs.com/package/ex-js-linq)
+[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=2.1.0&x2=0)](https://www.npmjs.com/package/ex-js-linq)
 
 # ex-js-linq
 helpful libraries for JavaScript programming
@@ -84,6 +84,9 @@ var sampleData = [
 ```js
     var result=new linq(sampleData)
         .firstOrDefault(function(x){return x.id==5;});
+    // or
+    var result=new linq(sampleData)
+        .firstOrDefault();     
 ```
 ### .indexOf
 ```js
