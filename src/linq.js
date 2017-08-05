@@ -1,4 +1,5 @@
 var collection = require("./collection.js");
+var defaultExpression = function (x) { return x; }
 
 collection.prototype.forEach = function (expression) {
     for (var index = 0; index < this.length; index++) {
@@ -42,14 +43,16 @@ collection.prototype.remove = function (expression) {
     return new collection(list);
 }
 collection.prototype.sum = function (expression) {
-    var total = undefined;
+    var total = 0;
+    expression = expression || defaultExpression;
     this.forEach(function (item) {
         total += expression(item);
     });
     return total;
 }
 collection.prototype.avg = function (expression) {
-    var result = undefined;
+    var result = 0;
+    expression = expression || defaultExpression;
     this.forEach(function (item) {
         result += expression(item);
     });
@@ -57,7 +60,8 @@ collection.prototype.avg = function (expression) {
     return result / this.length;
 }
 collection.prototype.min = function (expression) {
-    var minValue = undefined;
+    var minValue = 0;
+    expression = expression || defaultExpression;
     this.forEach(function (item) {
         var val = expression(item);
         if (minValue === undefined) {
@@ -69,7 +73,8 @@ collection.prototype.min = function (expression) {
     return minValue;
 }
 collection.prototype.max = function (expression) {
-    var maxValue = undefined;
+    var maxValue = 0;
+    expression = expression || defaultExpression;
     this.forEach(function (item) {
         var val = expression(item);
         if (maxValue === undefined) {
@@ -94,6 +99,7 @@ collection.prototype.where = function (expression) {
 
 collection.prototype.firstOrDefault = function (expression) {
     var findItem = undefined;
+    expression = expression || defaultExpression;
     this.forEach(function (item) {
         if (findItem === undefined && expression(item)) {
             findItem = item;
@@ -155,6 +161,7 @@ collection.prototype.orderBy = function (expression) {
     return new collection(list);
 }
 collection.prototype.orderByDescending = function (expression) {
+    _this = this;
     var list = this.getEnumerator();
     this.forEach(function (x, xIndex) {
         var isInLine = true;
@@ -196,6 +203,40 @@ collection.prototype.indexOf = function (expression) {
 
 collection.prototype.toArray = function () {
     return this.getEnumerator();
+}
+
+collection.prototype.distinct = function (expression) {
+    _this = this;
+    expression = expression || defaultExpression;
+    this.forEach(function (x) {
+        var val = expression(x);
+        if (!new collection(list).any(function (y) { return y == val; })) {
+            _this.getEnumerator().push(val);
+        }
+    });
+    return _this;
+}
+collection.prototype.add = function (item) {
+    this.getEnumerator().push(item);
+}
+collection.prototype.addRange = function (items) {
+    _this = this;
+    new collection(items).forEach(function (x) {
+        _this.getEnumerator().push(x);
+    });
+}
+
+collection.prototype.join = function (array) {
+    _this = this;
+    new collection(array).forEach(function (x) {
+        _this.getEnumerator().push(x);
+    });
+    return this;
+}
+
+collection.prototype.count = function (expression) {
+    expression = expression || defaultExpression;
+    return this.where(expression).length;
 }
 
 module.exports = collection;
